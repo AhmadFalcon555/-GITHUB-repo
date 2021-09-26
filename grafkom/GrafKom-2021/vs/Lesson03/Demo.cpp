@@ -20,7 +20,9 @@ void Demo::Init() {
 	BuildColoredCube();
 	BuildColoredCube2();
 
-	BuildColoredPlane();
+	//BuildColoredPlane();
+
+	InitCamera();
 }
 
 void Demo::DeInit() {
@@ -42,6 +44,69 @@ void Demo::DeInit() {
 void Demo::ProcessInput(GLFWwindow *window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
+		if (fovy < 90) {
+			fovy += 0.0001f;
+		}
+	}
+
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+		if (fovy > 0) {
+			fovy -= 0.0001f;
+		}
+	}
+
+	// update camera movement 
+	// -------------
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+		MoveCamera(CAMERA_SPEED);
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+		MoveCamera(-CAMERA_SPEED);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+		StrafeCamera(-CAMERA_SPEED);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+		StrafeCamera(CAMERA_SPEED);
+	}
+
+	// update camera rotation
+	// ----------------------
+	double mouseX, mouseY;
+	double midX = screenWidth / 2;
+	double midY = screenHeight / 2;
+	float angleY = 0.0f;
+	float angleZ = 0.0f;
+
+	// Get mouse position
+	glfwGetCursorPos(window, &mouseX, &mouseY);
+	if ((mouseX == midX) && (mouseY == midY)) {
+		return;
+	}
+
+	// Set mouse position
+	glfwSetCursorPos(window, midX, midY);
+
+	// Get the direction from the mouse cursor, set a resonable maneuvering speed
+	angleY = (float)((midX - mouseX)) / 1000;
+	angleZ = (float)((midY - mouseY)) / 1000;
+
+	// The higher the value is the faster the camera looks around.
+	viewCamY += angleZ * 2;
+
+	// limit the rotation around the x-axis
+	if ((viewCamY - posCamY) > 8) {
+		viewCamY = posCamY + 8;
+	}
+	if ((viewCamY - posCamY) < -8) {
+		viewCamY = posCamY - 8;
+	}
+	RotateCamera(-angleY);
+
 }
 
 void Demo::Update(double deltaTime) {
@@ -66,14 +131,15 @@ void Demo::Render() {
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	// LookAt camera (position, target/direction, up)
-	glm::mat4 view = glm::lookAt(glm::vec3(0, 3, 8), glm::vec3(0, 0, 0), glm::vec3(0.0f, 1.0f, 0.0f));
+	//glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 view = glm::lookAt(glm::vec3(posCamX, posCamY, posCamZ), glm::vec3(viewCamX, viewCamY, viewCamZ), glm::vec3(upCamX, upCamY, upCamZ));
 	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	DrawColoredCube();
 	DrawColoredCube2();
 
-	DrawColoredPlane();
+	//DrawColoredPlane();
 
 
 	glDisable(GL_DEPTH_TEST);
@@ -88,7 +154,7 @@ void Demo::BuildColoredCube() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("crate.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("fridge bawah.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -136,9 +202,9 @@ void Demo::BuildColoredCube() {
 
 	unsigned int indices[] = {
 		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
+		4,  6,  5,  4,  7,  6,   // right
+		8,  10,  9, 8,  11, 10,  // back
+		12, 13, 14, 12, 14, 15,  // left
 		16, 18, 17, 16, 19, 18,  // upper
 		20, 22, 21, 20, 23, 22   // bottom
 	};
@@ -184,7 +250,7 @@ void Demo::BuildColoredCube2() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	int width, height;
-	unsigned char* image = SOIL_load_image("marble.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("fridge atas.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -194,47 +260,47 @@ void Demo::BuildColoredCube2() {
 	float vertices[] = {
 		// format position, tex coords
 		// front
-		1.5, -0.5, 0.5, 0, 0,  // 0
-		2.5, -0.5, 0.5, 1, 0,   // 1
-		2.5,  0.5, 0.5, 1, 1,   // 2
-		1.5,  0.5, 0.5, 0, 1,  // 3
+		-0.5, 0.5, 0.5, 0, 0,  // 0
+		0.5, 0.5, 0.5, 1, 0,   // 1
+		0.5,  1.5, 0.5, 1, 1,   // 2
+		-0.5,  1.5, 0.5, 0, 1,  // 3
 
 		// right
-		2.5,  0.5,  0.5, 0, 0,  // 4
-		2.5,  0.5, -0.5, 1, 0,  // 5
-		2.5, -0.5, -0.5, 1, 1,  // 6
-		2.5, -0.5,  0.5, 0, 1,  // 7
+		0.5,  1.5,  0.5, 0, 0,  // 4
+		0.5,  1.5, -0.5, 1, 0,  // 5
+		0.5, 0.5, -0.5, 1, 1,  // 6
+		0.5, 0.5,  0.5, 0, 1,  // 7
 
 		// back
-		1.5, -0.5, -0.5, 0, 0, // 8 
-		2.5,  -0.5, -0.5, 1, 0, // 9
-		2.5,   0.5, -0.5, 1, 1, // 10
-		1.5,  0.5, -0.5, 0, 1, // 11
+		-0.5, 0.5, -0.5, 0, 0, // 8 
+		0.5,  0.5, -0.5, 1, 0, // 9
+		0.5,   1.5, -0.5, 1, 1, // 10
+		-0.5,  1.5, -0.5, 0, 1, // 11
 
 		// left
-		1.5, -0.5, -0.5, 0, 0, // 12
-		1.5, -0.5,  0.5, 1, 0, // 13
-		1.5,  0.5,  0.5, 1, 1, // 14
-		1.5,  0.5, -0.5, 0, 1, // 15
+		-0.5, 0.5, -0.5, 0, 0, // 12
+		-0.5, 0.5,  0.5, 1, 0, // 13
+		-0.5,  1.5,  0.5, 1, 1, // 14
+		-0.5,  1.5, -0.5, 0, 1, // 15
 
 		// upper
-		2.5, 0.5,  0.5, 0, 0,   // 16
-		1.5, 0.5,  0.5, 1, 0,  // 17
-		1.5, 0.5, -0.5, 1, 1,  // 18
-		2.5, 0.5, -0.5, 0, 1,   // 19
+		0.5, 1.5,  0.5, 0, 0,   // 16
+		-0.5, 1.5,  0.5, 1, 0,  // 17
+		-0.5, 1.5, -0.5, 1, 1,  // 18
+		0.5, 1.5, -0.5, 0, 1,   // 19
 
 		// bottom
-		1.5, -0.5, -0.5, 0, 0, // 20
-		2.5, -0.5, -0.5, 1, 0,  // 21
-		2.5, -0.5,  0.5, 1, 1,  // 22
-		1.5, -0.5,  0.5, 0, 1, // 23
+		-0.5, 0.5, -0.5, 0, 0, // 20
+		0.5, 0.5, -0.5, 1, 0,  // 21
+		0.5, 0.5,  0.5, 1, 1,  // 22
+		-0.5, 0.5,  0.5, 0, 1, // 23
 	};
 
 	unsigned int indices[] = {
 		0,  1,  2,  0,  2,  3,   // front
-		4,  5,  6,  4,  6,  7,   // right
-		8,  9,  10, 8,  10, 11,  // back
-		12, 14, 13, 12, 15, 14,  // left
+		4,  6,  5,  4,  7,  6,   // right
+		8,  10,  9, 8,  11, 10,  // back
+		12, 13, 14, 12, 14, 15,  // left
 		16, 18, 17, 16, 19, 18,  // upper
 		20, 22, 21, 20, 23, 22   // bottom
 	};
@@ -373,6 +439,57 @@ void Demo::DrawColoredPlane()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glBindVertexArray(0);
 }
+
+void Demo::InitCamera()
+{
+	posCamX = 0.0f;
+	posCamY = 1.0f;
+	posCamZ = 8.0f;
+	viewCamX = 0.0f;
+	viewCamY = 1.0f;
+	viewCamZ = 0.0f;
+	upCamX = 0.0f;
+	upCamY = 1.0f;
+	upCamZ = 0.0f;
+	CAMERA_SPEED = 0.001f;
+	fovy = 45.0f;
+	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+
+void Demo::MoveCamera(float speed)
+{
+	float x = viewCamX - posCamX;
+	float z = viewCamZ - posCamZ;
+	// forward positive cameraspeed and backward negative -cameraspeed.
+	posCamX = posCamX + x * speed;
+	posCamZ = posCamZ + z * speed;
+	viewCamX = viewCamX + x * speed;
+	viewCamZ = viewCamZ + z * speed;
+}
+
+void Demo::StrafeCamera(float speed)
+{
+	float x = viewCamX - posCamX;
+	float z = viewCamZ - posCamZ;
+	float orthoX = -z;
+	float orthoZ = x;
+
+	// left positive cameraspeed and right negative -cameraspeed.
+	posCamX = posCamX + orthoX * speed;
+	posCamZ = posCamZ + orthoZ * speed;
+	viewCamX = viewCamX + orthoX * speed;
+	viewCamZ = viewCamZ + orthoZ * speed;
+}
+
+void Demo::RotateCamera(float speed)
+{
+	float x = viewCamX - posCamX;
+	float z = viewCamZ - posCamZ;
+	viewCamZ = (float)(posCamZ + glm::sin(speed) * x + glm::cos(speed) * z);
+	viewCamX = (float)(posCamX + glm::cos(speed) * x - glm::sin(speed) * z);
+}
+
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();

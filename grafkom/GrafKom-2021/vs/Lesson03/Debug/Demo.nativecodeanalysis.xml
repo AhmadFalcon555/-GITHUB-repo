@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::shaderProgram' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::shaderProgram</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VAO' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VAO</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VBO' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VBO</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::EBO' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::EBO</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::texture' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::texture</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VBO2' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VBO2</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VAO2' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VAO2</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::EBO2' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::EBO2</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::texture2' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::texture2</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VBO3' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VBO3</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::VAO3' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::VAO3</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::EBO3' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::EBO3</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\</FILEPATH>
+      <FILENAME>Demo.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>6</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Demo::texture3' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Demo::{ctor}</FUNCTION>
+    <DECORATED>??0Demo@@QAE@XZ</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Demo::texture3</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

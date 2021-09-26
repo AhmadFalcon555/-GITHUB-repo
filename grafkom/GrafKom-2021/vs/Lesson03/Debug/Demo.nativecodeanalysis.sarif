@@ -1,0 +1,1248 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::shaderProgram' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::shaderProgram"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VAO' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VAO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VBO' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VBO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::EBO' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::EBO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::texture' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::texture"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VBO2' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VBO2"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VAO2' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VAO2"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::EBO2' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::EBO2"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::texture2' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::texture2"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VBO3' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VBO3"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::VAO3' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::VAO3"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::EBO3' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::EBO3"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Variable 'Demo::texture3' is uninitialized. Always initialize a member variable (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+                },
+                "region": {
+                  "startLine": 5,
+                  "startColumn": 7,
+                  "endLine": 5,
+                  "endColumn": 7
+                }
+              },
+              "logicalLocations": [
+                {
+                  "decoratedName": "??0Demo@@QAE@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Demo::texture3"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.29.30133.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX86\\x86\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x004BD1C0 -il C:\\Users\\AHMAD\\AppData\\Local\\Temp\\_CL_98509a64ast -typedil -f Demo.cpp -Ze -D_MSC_EXTENSIONS -Zp8 -Gs -pc \\:/ -D_MSC_VER=1929 -D_MSC_FULL_VER=192930133 -D_MSC_BUILD=0 -D_WIN32 -D_M_IX86=600 -D_M_IX86_FP=2 -GR -D_CPPRTTI -nologo -W 3 -diagnostics:column -D_GUARDOVERFLOW_CRT_ALLOCATORS=1 -Ot -DCODE_ANALYSIS -D_MBCS -EHs -D_CPPUNWIND -EHc -D__MSVC_RUNTIME_CHECKS -RTCs -RTCu -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -Zc:wchar_t -Zc:forScope -FoDebug\\Demo.obj -FdDebug\\vc142.pdb -external:W 3 -Gd -analyze:projectdirectory E:\\`GITHUB repo\\grafkom\\GrafKom-2021\\vs\\Lesson03 -analyze:rulesetdirectory ;C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\NativeRecommendedRules.ruleset -analyze:quiet -analyze:plugin C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX86\\x86\\EspXEngine.dll -FC -errorreport:prompt -I E:\\`GITHUB repo\\grafkom\\GrafKom-2021\\deps\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I E:\\`GITHUB repo\\grafkom\\GrafKom-2021\\vs\\Lesson03\\Include\\um -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\atlmfc\\include -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -external:I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -I C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\VS\\UnitTest\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -external:I E:\\`GITHUB repo\\grafkom\\GrafKom-2021\\vs\\Lesson03\\Include\\um -I E:\\`GITHUB repo\\grafkom\\GrafKom-2021\\vs\\Lesson03\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/RenderEngine.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "b9385b9d9de06ce1c7aaa6e9707ba162"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/vs/lesson03/renderengine.h"
+          },
+          "hashes": {
+            "md5": "00a7af9194e666059678edcebf199879"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glad/glad.h"
+          },
+          "hashes": {
+            "md5": "3ed863db82e3b40d650f98c894c8c85d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/khr/khrplatform.h"
+          },
+          "hashes": {
+            "md5": "b1b3e1eecabd608e3d05f1e338dc1bed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glfw/glfw3.h"
+          },
+          "hashes": {
+            "md5": "64dc9f9e2ebf8245ff9ffb0c620a43c6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///E:/`GITHUB repo/grafkom/GrafKom-2021/vs/Lesson03/Demo.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "md5": "0144049283067ce9fd6a8dbddffa5893"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/vs/lesson03/demo.h"
+          },
+          "hashes": {
+            "md5": "99c78a8b7d642816505d4fcc662600b6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/glm.hpp"
+          },
+          "hashes": {
+            "md5": "b9b7c1cbfbaf07fe8a983be33912ac37"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/_fixes.hpp"
+          },
+          "hashes": {
+            "md5": "8f130e3a683ff1a7b3e427cf613cde07"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/fwd.hpp"
+          },
+          "hashes": {
+            "md5": "1af60965974543380a4305a906be933e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_int.hpp"
+          },
+          "hashes": {
+            "md5": "0305ad71f5e767422587dccd49b8f9ca"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/setup.hpp"
+          },
+          "hashes": {
+            "md5": "5f9f85720815a19ef51002bdd381ea38"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_float.hpp"
+          },
+          "hashes": {
+            "md5": "e2fade9f4febb3101bdc0a019baccb5e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec.hpp"
+          },
+          "hashes": {
+            "md5": "ea8091548ad5fbf7803dd29d770d155c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/precision.hpp"
+          },
+          "hashes": {
+            "md5": "49db4d8d07afa61a3e04006c4b631706"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat.hpp"
+          },
+          "hashes": {
+            "md5": "4ee424fca10443e3771653de4f5d1641"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/vec2.hpp"
+          },
+          "hashes": {
+            "md5": "318d740c0a08e76ca1f245ee1b32c320"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec2.hpp"
+          },
+          "hashes": {
+            "md5": "be759697063c0ff402895495958e853b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec2.inl"
+          },
+          "hashes": {
+            "md5": "a8b567b9a4ec4bdb1049aa25fee0cf28"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/vec3.hpp"
+          },
+          "hashes": {
+            "md5": "82ebaa3df0099fe9a06b9cac58ef2917"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec3.hpp"
+          },
+          "hashes": {
+            "md5": "a794aed9e747f08237b1e6c352c38df5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec3.inl"
+          },
+          "hashes": {
+            "md5": "5f17065da088555b3799744377886b15"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/vec4.hpp"
+          },
+          "hashes": {
+            "md5": "3c2f50b7b76a570fdb669a38b98fa547"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec4.hpp"
+          },
+          "hashes": {
+            "md5": "792ed932db45a2df296f2d162440d3eb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec4.inl"
+          },
+          "hashes": {
+            "md5": "f85d8398f703f87d505a76b0c38d4d4b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec4_sse2.inl"
+          },
+          "hashes": {
+            "md5": "1830c92faad0092b3f5abd855cb0a92d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat2x2.hpp"
+          },
+          "hashes": {
+            "md5": "7cc6000bb9cdfbf421716a56c2c9bea0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x2.hpp"
+          },
+          "hashes": {
+            "md5": "279cb22ce4ef0175e4702336183f0e9c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x2.inl"
+          },
+          "hashes": {
+            "md5": "e992e17391df8221c8f31218a1ad649a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat2x3.hpp"
+          },
+          "hashes": {
+            "md5": "428618212110cab47b5d1201cebe4e3b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x3.hpp"
+          },
+          "hashes": {
+            "md5": "9acd956f12ab92cf0c38d7631a766289"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x3.inl"
+          },
+          "hashes": {
+            "md5": "195b71552571d35c9129eecb159284b3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat2x4.hpp"
+          },
+          "hashes": {
+            "md5": "7cd63517b3aaeb080ce085056266168b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x4.hpp"
+          },
+          "hashes": {
+            "md5": "92bc1b61f27922041a5cee87e066e8d4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat2x4.inl"
+          },
+          "hashes": {
+            "md5": "c3b9cc76c57c5d06c06c02c4a528a33b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat3x2.hpp"
+          },
+          "hashes": {
+            "md5": "90fc076118c4692080bc111a0258d45f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x2.hpp"
+          },
+          "hashes": {
+            "md5": "aee2539ba2e1960aed9ca4e13c26726b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x2.inl"
+          },
+          "hashes": {
+            "md5": "08eb3ef24f0910631d1ae4d2aac0976a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat3x3.hpp"
+          },
+          "hashes": {
+            "md5": "1d2a7ea231e24cc58860114e028230f2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x3.hpp"
+          },
+          "hashes": {
+            "md5": "cedf2a7f21eac78d0196d1d07ec7a150"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x3.inl"
+          },
+          "hashes": {
+            "md5": "feaf80ea3b341794a4ab4a51b28fa93b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat3x4.hpp"
+          },
+          "hashes": {
+            "md5": "dea1d5352f636e9ded91c272b284ceed"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x4.hpp"
+          },
+          "hashes": {
+            "md5": "0f8444c3fc1c0116471fa42d9c6f79c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat3x4.inl"
+          },
+          "hashes": {
+            "md5": "954d9dc9903f96cd5d98bde1bb994ab1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat4x2.hpp"
+          },
+          "hashes": {
+            "md5": "626391ca51c972f3d6d764ebaf805bef"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x2.hpp"
+          },
+          "hashes": {
+            "md5": "61acd977da0b0577c195f1f1b8607859"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x2.inl"
+          },
+          "hashes": {
+            "md5": "b62549c533fe257619cd143c6c3b51c7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat4x3.hpp"
+          },
+          "hashes": {
+            "md5": "f36c1b9d4c21fc5778e8db93fc81f72b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x3.hpp"
+          },
+          "hashes": {
+            "md5": "f022dd5a0bdfc5ce635a1eee508b1fee"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x3.inl"
+          },
+          "hashes": {
+            "md5": "7bfbc86298bb089fcaa33779ffd4c0bb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/mat4x4.hpp"
+          },
+          "hashes": {
+            "md5": "580e960033bfbd49e844ce70ed3c61f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x4.hpp"
+          },
+          "hashes": {
+            "md5": "c6774d37761a08176362cfa436520cc7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_mat4x4.inl"
+          },
+          "hashes": {
+            "md5": "74ccca89d63c4a95d767a25b30ca113b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/trigonometric.hpp"
+          },
+          "hashes": {
+            "md5": "61e98cdf37585200601f9a21b6c308f3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_trigonometric.hpp"
+          },
+          "hashes": {
+            "md5": "b106d4e8e78e2cefa161bcc3ad22a35a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_trigonometric.inl"
+          },
+          "hashes": {
+            "md5": "9253d557d28922be7cf2275b73229fc3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/_vectorize.hpp"
+          },
+          "hashes": {
+            "md5": "cd15f11381117cec6a859e4c97c6c404"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec1.hpp"
+          },
+          "hashes": {
+            "md5": "ce0a045b1c03c4f6e39e5fc15305a393"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_vec1.inl"
+          },
+          "hashes": {
+            "md5": "46ddbd991961a13f7af7dd10067af38a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/exponential.hpp"
+          },
+          "hashes": {
+            "md5": "885d25e740a9d4d9505b72e881b1767e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_exponential.hpp"
+          },
+          "hashes": {
+            "md5": "34c5e215ad13f6c1ed83869228889af7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_exponential.inl"
+          },
+          "hashes": {
+            "md5": "377bb87916f640d3a912984ffeb83a2c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_vector_relational.hpp"
+          },
+          "hashes": {
+            "md5": "8dd8c9b41bed6dcb479c9312d61798be"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_vector_relational.inl"
+          },
+          "hashes": {
+            "md5": "96bd5ee4f4d4541c114a2f07a4a7a9e5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/common.hpp"
+          },
+          "hashes": {
+            "md5": "ed54f921a6a099ee5361671fd0c3fe5b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_common.hpp"
+          },
+          "hashes": {
+            "md5": "96c39b14944e5f50cd696142b6f01bc0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_common.inl"
+          },
+          "hashes": {
+            "md5": "8aa05e01fd4c50b7015376e52b40bf71"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/packing.hpp"
+          },
+          "hashes": {
+            "md5": "e9c71df683b10d28d81470dbf0d6b569"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_packing.hpp"
+          },
+          "hashes": {
+            "md5": "73a7b6280d62af566a454423a1f28d3d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_packing.inl"
+          },
+          "hashes": {
+            "md5": "155235c9750066acf87cf2a1859f59f8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_half.hpp"
+          },
+          "hashes": {
+            "md5": "d4b178f898a670f3469ebf9d5db530fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/type_half.inl"
+          },
+          "hashes": {
+            "md5": "b572cf4af24fcb6c30217b477c1f8d05"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/geometric.hpp"
+          },
+          "hashes": {
+            "md5": "c5c43c9b4c9bef76d456030c964d2378"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_geometric.hpp"
+          },
+          "hashes": {
+            "md5": "d201fece3f103a62911bdcb8f751f5ec"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_geometric.inl"
+          },
+          "hashes": {
+            "md5": "695ad1bb0e794a5cbae2dd29637f1bb7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/matrix.hpp"
+          },
+          "hashes": {
+            "md5": "7fccf3f7912ec88799e3d47a5f3aa445"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_matrix.hpp"
+          },
+          "hashes": {
+            "md5": "d65bf4cb75fae615f54cccee8322bf10"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_matrix.inl"
+          },
+          "hashes": {
+            "md5": "e08e3b1be6e89513e134cce19a9ddec2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/vector_relational.hpp"
+          },
+          "hashes": {
+            "md5": "8b057a2670d993ced3837c23b18b8c7f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/integer.hpp"
+          },
+          "hashes": {
+            "md5": "ccd24f80b17dd4c2cda08ff910f670bd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_integer.hpp"
+          },
+          "hashes": {
+            "md5": "75e5da7ae23e6a9eeb77fe714b68cf5e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/detail/func_integer.inl"
+          },
+          "hashes": {
+            "md5": "f31d0417c78235fb3bb16e6345c332d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/matrix_transform.hpp"
+          },
+          "hashes": {
+            "md5": "5315cc22b2242b6bd88ae3afe00cbecc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/constants.hpp"
+          },
+          "hashes": {
+            "md5": "46a834caf9baf335bf31e5cebd2935fa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/constants.inl"
+          },
+          "hashes": {
+            "md5": "1751fd23f85ccf70c36d596e1440cdf0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/matrix_transform.inl"
+          },
+          "hashes": {
+            "md5": "f80759f3dc848cfbb161cee7258ffcdd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/type_ptr.hpp"
+          },
+          "hashes": {
+            "md5": "9d858bc137b8cf6852f0eb04580b5ea6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/quaternion.hpp"
+          },
+          "hashes": {
+            "md5": "150c4f26ec28344d506b6a5ee92027a1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/quaternion.inl"
+          },
+          "hashes": {
+            "md5": "bc747583e075747c05c15bd9a80d87d5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/type_ptr.inl"
+          },
+          "hashes": {
+            "md5": "4e6ea33d22aef69a5671d4fc7cbc849f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/vector_angle.hpp"
+          },
+          "hashes": {
+            "md5": "9ee59aa547e587b2cb51413757d1ad4e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/epsilon.hpp"
+          },
+          "hashes": {
+            "md5": "b1267a72685b15e56f4c6b5b398df6c4"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtc/epsilon.inl"
+          },
+          "hashes": {
+            "md5": "5454c728141392e9cac710e57890363b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/quaternion.hpp"
+          },
+          "hashes": {
+            "md5": "69c30db57c726e6147ac30c06bb63a14"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/norm.hpp"
+          },
+          "hashes": {
+            "md5": "1445e6d669344a8ceaff15524e95e6aa"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/norm.inl"
+          },
+          "hashes": {
+            "md5": "412f3b7b9c78de423ddf568cd17cbe7a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/quaternion.inl"
+          },
+          "hashes": {
+            "md5": "9705af9a4faf9919687b9c7570d9c8ff"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/rotate_vector.hpp"
+          },
+          "hashes": {
+            "md5": "3ec96ef8d282442fa72af7cc8dba4246"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/transform.hpp"
+          },
+          "hashes": {
+            "md5": "cfad5e224e14a6897bcb0e57ad55a622"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/transform.inl"
+          },
+          "hashes": {
+            "md5": "082f85240d4d8a19f18c9e0ca0a9c47d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/rotate_vector.inl"
+          },
+          "hashes": {
+            "md5": "22b16b8a39c896828343853e9c8ad702"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/glm/gtx/vector_angle.inl"
+          },
+          "hashes": {
+            "md5": "a03c0a0dc3a2868cf50d0276b1b65ade"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/`github repo/grafkom/grafkom-2021/deps/include/soil/soil.h"
+          },
+          "hashes": {
+            "md5": "f5ebb4592ffde8a3d1d2e828dfb2082a"
+          }
+        }
+      ]
+    }
+  ]
+}
