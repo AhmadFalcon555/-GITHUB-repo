@@ -54,5 +54,11 @@
     <Image Include="fridge bawah.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="fridge samping atas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fridge samping bawah.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

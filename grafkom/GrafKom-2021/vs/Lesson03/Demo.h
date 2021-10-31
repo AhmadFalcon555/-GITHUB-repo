@@ -13,8 +13,10 @@ public:
 	Demo();
 	~Demo();
 private:
-	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2, VBO3, VAO3, EBO3, texture3;
+	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2, VBO3, VAO3, EBO3, texture3, VBO4, VAO4, EBO4, texture4, VBO5, VAO5, EBO5, texture5;
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
+	float angle = 0;
+	
 	virtual void Init();
 	virtual void DeInit();
 	virtual void Update(double deltaTime);
@@ -22,10 +24,14 @@ private:
 	virtual void ProcessInput(GLFWwindow *window);
 	void BuildColoredCube();
 	void BuildColoredCube2();
+	void BuildSideCube();
+	void BuildSideCube2();
 	void BuildColoredPlane();
 	void DrawColoredCube();
 	void DrawColoredCube2();
 	void DrawColoredPlane();
+	void DrawColoredSideCube();
+	void DrawColoredSideCube2();
 
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
