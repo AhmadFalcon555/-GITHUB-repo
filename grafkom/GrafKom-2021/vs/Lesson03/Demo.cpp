@@ -359,7 +359,7 @@ void Demo::DrawColoredCube()
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, -2, 0));
+	model = glm::translate(model, glm::vec3(0, 5, 0));
 
 	model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
 
