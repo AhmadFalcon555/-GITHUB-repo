@@ -22,7 +22,7 @@ void Demo::Init() {
 	BuildSideCube();
 	BuildSideCube2();
 
-	//BuildColoredPlane();
+	BuildColoredPlane();
 
 	InitCamera();
 }
@@ -118,7 +118,7 @@ void Demo::ProcessInput(GLFWwindow *window) {
 }
 
 void Demo::Update(double deltaTime) {
-	angle += (float)((deltaTime * 1.5f) / 1000);
+	//angle += (float)((deltaTime * 1.5f) / 1000);
 }
 
 void Demo::Render() {
@@ -140,16 +140,70 @@ void Demo::Render() {
 
 	// LookAt camera (position, target/direction, up)
 	//glm::mat4 view = glm::lookAt(glm::vec3(0, 0, 15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::vec3 cameraPos = glm::vec3(0, 3, 3);
+	glm::vec3 cameraFront = glm::vec3(0, -1, -1);
 	glm::mat4 view = glm::lookAt(glm::vec3(posCamX, posCamY, posCamZ), glm::vec3(viewCamX, viewCamY, viewCamZ), glm::vec3(upCamX, upCamY, upCamZ));
 	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+	// set lighting attribute
+	GLint viewPosLoc = glGetUniformLocation(this->shaderProgram, "viewPos");
+	glUniform3f(viewPosLoc, 0, 2, 3);
+
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.direction"), 0.0f, -1.0f, -1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.ambient"), 0.1f, 0.1f, 0.1f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.diffuse"), 1.0f, 0.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.specular"), 0.1f, 0.1f, 0.1f);
+	// point light 1
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].position"), 0.0f, 3.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].ambient"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].diffuse"), 1.0f, 0.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].specular"), 1.0f, 0.0f, 0.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].quadratic"), 0.032f);
+	// point light 2
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].position"), -2.0f, 3.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].ambient"), 0.0f, 1.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].diffuse"), 0.0f, 1.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].specular"), 0.0f, 1.0f, 0.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].quadratic"), 0.032f);
+	// point light 3
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].position"), 2.0f, 3.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].ambient"), 0.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].diffuse"), 0.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].specular"), 0.0f, 0.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].quadratic"), 0.032f);
+	// point light 4
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].position"), 0.0f, 3.0f, 2.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].ambient"), 0.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].diffuse"), 0.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].specular"), 0.0f, 1.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].quadratic"), 0.032f);
+	// spotLight
+	glUniform3fv(glGetUniformLocation(this->shaderProgram, "spotLight.position"), 1, &cameraPos[0]);
+	glUniform3fv(glGetUniformLocation(this->shaderProgram, "spotLight.direction"), 1, &cameraFront[0]);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.ambient"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.diffuse"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.specular"), 1.0f, 0.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.quadratic"), 0.032f);
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
+	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
 
 	DrawColoredCube();
 	DrawColoredCube2();
 
 	DrawColoredSideCube();
 	DrawColoredSideCube2();
-	//DrawColoredPlane();
+	DrawColoredPlane();
 
 
 	glDisable(GL_DEPTH_TEST);
@@ -238,6 +292,10 @@ void Demo::BuildColoredCube() {
 	// define texcoord pointer layout 1
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+
+	// define normal pointer layout 2
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
 
 	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -354,16 +412,18 @@ void Demo::DrawColoredCube()
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "material.diffuse"), 0);
+
+
 
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, 5, 0));
+	model = glm::translate(model, glm::vec3(0, 0, 0));
 
 	model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
 
-	model = glm::scale(model, glm::vec3(3, 3, 3));
+	model = glm::scale(model, glm::vec3(1, 1, 1));
 
 	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -383,6 +443,9 @@ void Demo::DrawColoredCube2()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 	glBindVertexArray(VAO3); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	glUniform3f(objectColorLoc, 1.0f, 0.0f, 1.0f);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
@@ -435,11 +498,14 @@ void Demo::BuildColoredPlane()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
 	// TexCoord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
+	// Normal attribute
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(2);
 
 	glBindVertexArray(0); // Unbind VAO
 }
@@ -450,9 +516,13 @@ void Demo::DrawColoredPlane()
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 1);
+	glUniform1i(glGetUniformLocation(this->shaderProgram, "material.diffuse"), 2);
 
 	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	glm::mat4 model;
+	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -567,6 +637,9 @@ void Demo::DrawColoredSideCube()
 
 	glBindVertexArray(VAO4); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
+	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	glUniform3f(objectColorLoc, .3f, 0.5f, 0.3f);
+
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -678,6 +751,9 @@ void Demo::DrawColoredSideCube2()
 	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
 
 	glBindVertexArray(VAO5); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+
+	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	glUniform3f(objectColorLoc, .6f, 0.7f, 0.8f);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 

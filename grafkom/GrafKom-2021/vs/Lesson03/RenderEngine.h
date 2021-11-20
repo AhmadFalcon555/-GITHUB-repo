@@ -24,7 +24,7 @@ protected:
 	virtual void DeInit() = 0;
 	virtual void Update(double deltaTime) = 0;
 	virtual void Render() = 0;
-	virtual void ProcessInput(GLFWwindow *window) = 0;
+	virtual void ProcessInput(GLFWwindow* window) = 0;
 
 	double GetDeltaTime();
 	void GetFPS();
