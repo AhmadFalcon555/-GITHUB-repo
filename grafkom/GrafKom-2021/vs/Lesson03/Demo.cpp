@@ -14,7 +14,7 @@ Demo::~Demo() {
 void Demo::Init() {
 	// build and compile our shader program
 	// ------------------------------------
-	shaderProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
+	activeProgram = BuildShader("vertexShader.vert", "fragmentShader.frag", nullptr);
 
 	BuildColoredCube();
 	BuildColoredCube2();
@@ -135,7 +135,7 @@ void Demo::Render() {
 
 	// Pass perspective projection matrix
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 100.0f);
-	GLint projLoc = glGetUniformLocation(this->shaderProgram, "projection");
+	GLint projLoc = glGetUniformLocation(this->activeProgram, "projection");
 	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	// LookAt camera (position, target/direction, up)
@@ -143,60 +143,60 @@ void Demo::Render() {
 	glm::vec3 cameraPos = glm::vec3(0, 3, 3);
 	glm::vec3 cameraFront = glm::vec3(0, -1, -1);
 	glm::mat4 view = glm::lookAt(glm::vec3(posCamX, posCamY, posCamZ), glm::vec3(viewCamX, viewCamY, viewCamZ), glm::vec3(upCamX, upCamY, upCamZ));
-	GLint viewLoc = glGetUniformLocation(this->shaderProgram, "view");
+	GLint viewLoc = glGetUniformLocation(this->activeProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 	// set lighting attribute
-	GLint viewPosLoc = glGetUniformLocation(this->shaderProgram, "viewPos");
+	GLint viewPosLoc = glGetUniformLocation(this->activeProgram, "viewPos");
 	glUniform3f(viewPosLoc, 0, 2, 3);
 
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.direction"), 0.0f, -1.0f, -1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.ambient"), 0.1f, 0.1f, 0.1f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.diffuse"), 1.0f, 0.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "dirLight.specular"), 0.1f, 0.1f, 0.1f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.direction"), 0.0f, -1.0f, -1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.ambient"), 0.1f, 0.1f, 0.1f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.diffuse"), 1.0f, 0.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.specular"), 0.1f, 0.1f, 0.1f);
 	// point light 1
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].position"), 0.0f, 3.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].ambient"), 1.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].diffuse"), 1.0f, 0.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[0].specular"), 1.0f, 0.0f, 0.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[0].quadratic"), 0.032f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].position"), 1.0f, 3.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].ambient"), 1.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].diffuse"), 1.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].specular"), 1.0f, 1.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].quadratic"), 0.032f);
 	// point light 2
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].position"), -2.0f, 3.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].ambient"), 0.0f, 1.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].diffuse"), 0.0f, 1.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[1].specular"), 0.0f, 1.0f, 0.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[1].quadratic"), 0.032f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].position"), -2.0f, 3.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].ambient"), 0.0f, 1.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].diffuse"), 0.0f, 1.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].specular"), 0.0f, 1.0f, 0.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].quadratic"), 0.032f);
 	// point light 3
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].position"), 2.0f, 3.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].ambient"), 0.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].diffuse"), 0.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[2].specular"), 0.0f, 0.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[2].quadratic"), 0.032f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].position"), 2.0f, 3.0f, 0.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].ambient"), 0.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].diffuse"), 0.0f, 0.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].specular"), 0.0f, 0.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].quadratic"), 0.032f);
 	// point light 4
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].position"), 0.0f, 3.0f, 2.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].ambient"), 0.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].diffuse"), 0.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "pointLights[3].specular"), 0.0f, 1.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "pointLights[3].quadratic"), 0.032f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].position"), 0.0f, 3.0f, 2.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].ambient"), 0.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].diffuse"), 0.0f, 1.0f, 1.0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].specular"), 0.0f, 1.0f, 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].constant"), 1.0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].quadratic"), 0.032f);
 	// spotLight
-	glUniform3fv(glGetUniformLocation(this->shaderProgram, "spotLight.position"), 1, &cameraPos[0]);
-	glUniform3fv(glGetUniformLocation(this->shaderProgram, "spotLight.direction"), 1, &cameraFront[0]);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.ambient"), 1.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.diffuse"), 1.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->shaderProgram, "spotLight.specular"), 1.0f, 0.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.quadratic"), 0.032f);
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
-	glUniform1f(glGetUniformLocation(this->shaderProgram, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
+	glUniform3fv(glGetUniformLocation(this->activeProgram, "spotLight.position"), 1, &cameraPos[0]);
+	glUniform3fv(glGetUniformLocation(this->activeProgram, "spotLight.direction"), 1, &cameraFront[0]);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.ambient"), .0f, 0.0f, .0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.diffuse"), .0f, 0.0f, .0f);
+	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.specular"), .0f, 0.0f, .0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.constant"), .0f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.linear"), 0.09f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.quadratic"), 0.032f);
+	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
+	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
 
 	DrawColoredCube();
 	DrawColoredCube2();
@@ -408,11 +408,18 @@ void Demo::BuildColoredCube2() {
 
 void Demo::DrawColoredCube()
 {
-	glUseProgram(shaderProgram);
+	glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "material.diffuse"), 0);
+	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	glUniform1f(shininessMatLoc, 0.6f);
 
 
 
@@ -425,7 +432,7 @@ void Demo::DrawColoredCube()
 
 	model = glm::scale(model, glm::vec3(1, 1, 1));
 
-	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	GLint modelLoc = glGetUniformLocation(this->activeProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -436,15 +443,22 @@ void Demo::DrawColoredCube()
 
 void Demo::DrawColoredCube2()
 {
-	glUseProgram(shaderProgram);
+	glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture3);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	glUniform1f(shininessMatLoc, 0.6f);
 
 	glBindVertexArray(VAO3); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
-	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
 	glUniform3f(objectColorLoc, 1.0f, 0.0f, 1.0f);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -456,29 +470,14 @@ void Demo::DrawColoredCube2()
 
 void Demo::BuildColoredPlane()
 {
-	// Load and create a texture 
-	glGenTextures(1, &texture2);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int width, height;
-	unsigned char* image = SOIL_load_image("marble.png", &width, &height, 0, SOIL_LOAD_RGBA);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(image);
-	glBindTexture(GL_TEXTURE_2D, 0);
-
 	// Build geometry
 	GLfloat vertices[] = {
 		// format position, tex coords
 		// bottom
-		-50.0, -0.5, -50.0,  0,  0,
-		 50.0, -0.5, -50.0, 10,  0,
-		 50.0, -0.5,  50.0, 10, 10,
-		-50.0, -0.5,  50.0,  0, 10,
+		-50.0, -0.5, -50.0,  0.0f,  1.0f,  0.0f,
+		 50.0, -0.5, -50.0,  0.0f,  1.0f,  0.0f,
+		 50.0, -0.5,  50.0,  0.0f,  1.0f,  0.0f,
+		-50.0, -0.5,  50.0,  0.0f,  1.0f,  0.0f,
 
 
 	};
@@ -498,30 +497,34 @@ void Demo::BuildColoredPlane()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
-	// TexCoord attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
 	// Normal attribute
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(5 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0); // Unbind VAO
 }
 
 void Demo::DrawColoredPlane()
 {
-	glUseProgram(shaderProgram);
+	glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "material.diffuse"), 2);
+	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	glUniform3f(ambientMatLoc, 1.0f, 1.0f, 1.0f);
+	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	glUniform3f(diffuseMatLoc, 0.5f, 0.5f, 0.0f);
+	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	glUniform3f(specularMatLoc, 0.60f, 0.60f, 0.50f);
+	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	glUniform1f(shininessMatLoc, 10.0f);
 
 	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 model;
-	GLint modelLoc = glGetUniformLocation(this->shaderProgram, "model");
+	GLint modelLoc = glGetUniformLocation(this->activeProgram, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -629,15 +632,22 @@ void Demo::BuildSideCube() {
 
 void Demo::DrawColoredSideCube()
 {
-	glUseProgram(shaderProgram);
+	glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture4);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	glUniform1f(shininessMatLoc, 0.6f);
 
 	glBindVertexArray(VAO4); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
-	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
 	glUniform3f(objectColorLoc, .3f, 0.5f, 0.3f);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -744,15 +754,22 @@ void Demo::BuildSideCube2() {
 
 void Demo::DrawColoredSideCube2()
 {
-	glUseProgram(shaderProgram);
+	glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture5);
-	glUniform1i(glGetUniformLocation(this->shaderProgram, "ourTexture"), 0);
+	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	glUniform1f(shininessMatLoc, 0.6f);
 
 	glBindVertexArray(VAO5); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
-	GLint objectColorLoc = glGetUniformLocation(this->shaderProgram, "objectColor");
+	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
 	glUniform3f(objectColorLoc, .6f, 0.7f, 0.8f);
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -814,5 +831,5 @@ void Demo::RotateCamera(float speed)
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();
-	app.Start("Manipulasi kamera dan rotasi objek 3D", 800, 600, false, false);
+	app.Start("lightning maps dan multiple lightning", 800, 600, false, false);
 }
