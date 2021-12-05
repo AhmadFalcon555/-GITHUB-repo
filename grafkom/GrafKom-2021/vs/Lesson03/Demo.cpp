@@ -24,8 +24,35 @@ void Demo::Init() {
 
 	BuildColoredPlane();
 
+	shadowmapShader = BuildShader("shadowMapping.vert", "shadowMapping.frag", nullptr);
+	depthmapShader = BuildShader("depthMap.vert", "depthMap.frag", nullptr);
+
 	InitCamera();
 }
+
+void Demo::BuildDepthMap() {
+	// configure depth map FBO
+	// -----------------------
+	glGenFramebuffers(1, &depthMapFBO);
+	// create depth texture
+	glGenTextures(1, &depthMap);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, this->SHADOW_WIDTH, this->SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+	float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+	// attach depth texture as FBO's depth buffer
+	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 
 void Demo::DeInit() {
 	// optional: de-allocate all resources once they've outlived their purpose:
@@ -122,16 +149,46 @@ void Demo::Update(double deltaTime) {
 }
 
 void Demo::Render() {
+
+
+	glEnable(GL_DEPTH_TEST);
 	glViewport(0, 0, this->screenWidth, this->screenHeight);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	glm::mat4 lightProjection, lightView;
+	glm::mat4 lightSpaceMatrix;
+	float near_plane = 1.0f, far_plane = 10.0f;
+	lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+	lightView = glm::lookAt(glm::vec3(-1.0f, 4.0f, 1.0f), glm::vec3(2.0f, 0.0f, -2.0f), glm::vec3(0.0, 5.0, 0.0));
+	lightSpaceMatrix = lightProjection * lightView;
+	// render scene from light's point of view
+	UseShader(this->depthmapShader);
+	glUniformMatrix4fv(glGetUniformLocation(this->depthmapShader, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+	glViewport(0, 0, this->SHADOW_WIDTH, this->SHADOW_HEIGHT);
+	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+	glClear(GL_DEPTH_BUFFER_BIT);
+	DrawColoredCube(this->depthmapShader);
+	DrawColoredCube2(this->depthmapShader);
+	DrawColoredSideCube(this->depthmapShader);
+	DrawColoredSideCube2(this->depthmapShader);
+	DrawColoredPlane(this->depthmapShader);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glEnable(GL_CULL_FACE);
 
 	glEnable(GL_DEPTH_TEST);
+
+	glViewport(0, 0, this->screenWidth, this->screenHeight);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Pass perspective projection matrix
+	UseShader(this->shadowmapShader);
+	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 100.0f);
+	glUniformMatrix4fv(glGetUniformLocation(this->shadowmapShader, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 	// Pass perspective projection matrix
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)this->screenWidth / (GLfloat)this->screenHeight, 0.1f, 100.0f);
@@ -146,65 +203,60 @@ void Demo::Render() {
 	GLint viewLoc = glGetUniformLocation(this->activeProgram, "view");
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-	// set lighting attribute
-	GLint viewPosLoc = glGetUniformLocation(this->activeProgram, "viewPos");
-	glUniform3f(viewPosLoc, 0, 2, 3);
+	// Setting Light Attributes
+	glUniformMatrix4fv(glGetUniformLocation(this->shadowmapShader, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(lightSpaceMatrix));
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "viewPos"), cameraPos.x, cameraPos.y, cameraPos.z);
+	glUniform3f(glGetUniformLocation(this->shadowmapShader, "lightPos"), -2.0f, 4.0f, -1.0f);
 
-	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.direction"), 0.0f, -1.0f, -1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.ambient"), 0.1f, 0.1f, 0.1f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.diffuse"), 1.0f, 0.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "dirLight.specular"), 0.1f, 0.1f, 0.1f);
-	// point light 1
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].position"), 1.0f, 3.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].ambient"), 1.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].diffuse"), 1.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[0].specular"), 1.0f, 1.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[0].quadratic"), 0.032f);
-	// point light 2
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].position"), -2.0f, 3.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].ambient"), 0.0f, 1.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].diffuse"), 0.0f, 1.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[1].specular"), 0.0f, 1.0f, 0.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[1].quadratic"), 0.032f);
-	// point light 3
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].position"), 2.0f, 3.0f, 0.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].ambient"), 0.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].diffuse"), 0.0f, 0.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[2].specular"), 0.0f, 0.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[2].quadratic"), 0.032f);
-	// point light 4
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].position"), 0.0f, 3.0f, 2.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].ambient"), 0.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].diffuse"), 0.0f, 1.0f, 1.0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "pointLights[3].specular"), 0.0f, 1.0f, 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].constant"), 1.0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "pointLights[3].quadratic"), 0.032f);
-	// spotLight
-	glUniform3fv(glGetUniformLocation(this->activeProgram, "spotLight.position"), 1, &cameraPos[0]);
-	glUniform3fv(glGetUniformLocation(this->activeProgram, "spotLight.direction"), 1, &cameraFront[0]);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.ambient"), .0f, 0.0f, .0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.diffuse"), .0f, 0.0f, .0f);
-	glUniform3f(glGetUniformLocation(this->activeProgram, "spotLight.specular"), .0f, 0.0f, .0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.constant"), .0f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.linear"), 0.09f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.quadratic"), 0.032f);
-	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.cutOff"), glm::cos(glm::radians(12.5f)));
-	glUniform1f(glGetUniformLocation(this->activeProgram, "spotLight.outerCutOff"), glm::cos(glm::radians(15.0f)));
+	// Configure Shaders
+	glUniform1i(glGetUniformLocation(this->shadowmapShader, "diffuseTexture"), 0);
+	glUniform1i(glGetUniformLocation(this->shadowmapShader, "shadowMap"), 1);
 
-	DrawColoredCube();
-	DrawColoredCube2();
 
-	DrawColoredSideCube();
-	DrawColoredSideCube2();
-	DrawColoredPlane();
+	//glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	// render shadow drawing part
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, plane_texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	DrawColoredPlane(this->shadowmapShader);
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, plane_texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	DrawColoredCube(this->shadowmapShader);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, plane_texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	DrawColoredCube2(this->shadowmapShader);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, plane_texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	DrawColoredSideCube(this->shadowmapShader);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, plane_texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	DrawColoredSideCube2(this->shadowmapShader);
+	//DrawColoredCube();
+	//DrawColoredCube2();
+
+	//DrawColoredSideCube();
+	//DrawColoredSideCube2();
+	//DrawColoredPlane();
+
+
+	//disable blend
+	glDisable(GL_BLEND);
 
 	glDisable(GL_DEPTH_TEST);
 }
@@ -406,9 +458,9 @@ void Demo::BuildColoredCube2() {
 }
 
 
-void Demo::DrawColoredCube()
+void Demo::DrawColoredCube(GLuint shader)
 {
-	glUseProgram(activeProgram);
+	/*glUseProgram(activeProgram);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -419,20 +471,19 @@ void Demo::DrawColoredCube()
 	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
 	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
 	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
-	glUniform1f(shininessMatLoc, 0.6f);
+	glUniform1f(shininessMatLoc, 0.6f);*/
 
-
-
+	UseShader(shader);
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0, 0, 0));
+	//model = glm::translate(model, glm::vec3(0, 0, 0));
 
-	model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
+	//model = glm::rotate(model, angle, glm::vec3(0, 1, 0));
 
-	model = glm::scale(model, glm::vec3(1, 1, 1));
+	//model = glm::scale(model, glm::vec3(1, 1, 1));
 
-	GLint modelLoc = glGetUniformLocation(this->activeProgram, "model");
+	GLint modelLoc = glGetUniformLocation(shader, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -441,25 +492,27 @@ void Demo::DrawColoredCube()
 	glBindVertexArray(0);
 }
 
-void Demo::DrawColoredCube2()
+void Demo::DrawColoredCube2(GLuint shader)
 {
-	glUseProgram(activeProgram);
+	//glUseProgram(activeProgram);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture3);
-	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
-	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
-	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
-	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
-	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
-	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
-	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
-	glUniform1f(shininessMatLoc, 0.6f);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture3);
+	//GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	//glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	//GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	//glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	//GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	//glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	//GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	//glUniform1f(shininessMatLoc, 0.6f);
+	UseShader(shader);
+	glBindVertexArray(VAO3);
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 0, 0));
 
-	glBindVertexArray(VAO3); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-
-	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
-	glUniform3f(objectColorLoc, 1.0f, 0.0f, 1.0f);
+	GLint modelLoc = glGetUniformLocation(shader, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
@@ -470,14 +523,29 @@ void Demo::DrawColoredCube2()
 
 void Demo::BuildColoredPlane()
 {
+	// Load and create a texture 
+	glGenTextures(1, &texture2);
+	glBindTexture(GL_TEXTURE_2D, texture2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	int width, height;
+	unsigned char* image = SOIL_load_image("marble.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	// Build geometry
 	GLfloat vertices[] = {
 		// format position, tex coords
 		// bottom
-		-50.0, -0.5, -50.0,  0.0f,  1.0f,  0.0f,
-		 50.0, -0.5, -50.0,  0.0f,  1.0f,  0.0f,
-		 50.0, -0.5,  50.0,  0.0f,  1.0f,  0.0f,
-		-50.0, -0.5,  50.0,  0.0f,  1.0f,  0.0f,
+		-50.0, -0.5, -50.0,  0,  0,
+		 50.0, -0.5, -50.0, 50,  0,
+		 50.0, -0.5,  50.0, 50, 50,
+		-50.0, -0.5,  50.0,  0, 50,
 
 
 	};
@@ -497,35 +565,24 @@ void Demo::BuildColoredPlane()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
-	// Normal attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	// TexCoord attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0); // Unbind VAO
 }
 
-void Demo::DrawColoredPlane()
+void Demo::DrawColoredPlane(GLuint shader)
 {
-	glUseProgram(activeProgram);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, texture2);
-	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
-	glUniform3f(ambientMatLoc, 1.0f, 1.0f, 1.0f);
-	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
-	glUniform3f(diffuseMatLoc, 0.5f, 0.5f, 0.0f);
-	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
-	glUniform3f(specularMatLoc, 0.60f, 0.60f, 0.50f);
-	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
-	glUniform1f(shininessMatLoc, 10.0f);
-
-	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	UseShader(shader);
 
 	glm::mat4 model;
-	GLint modelLoc = glGetUniformLocation(this->activeProgram, "model");
+	GLint modelLoc = glGetUniformLocation(shader, "model");
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+	glBindVertexArray(VAO2); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -630,25 +687,30 @@ void Demo::BuildSideCube() {
 
 }
 
-void Demo::DrawColoredSideCube()
+void Demo::DrawColoredSideCube(GLuint shader)
 {
-	glUseProgram(activeProgram);
+	//glUseProgram(activeProgram);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture4);
-	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
-	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
-	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
-	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
-	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
-	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
-	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
-	glUniform1f(shininessMatLoc, 0.6f);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture4);
+	//GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	//glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	//GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	//glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	//GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	//glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	//GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	//glUniform1f(shininessMatLoc, 0.6f);
 
-	glBindVertexArray(VAO4); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	UseShader(shader);
 
-	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
-	glUniform3f(objectColorLoc, .3f, 0.5f, 0.3f);
+	glBindVertexArray(VAO4);
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 0, 0));
+
+	GLint modelLoc = glGetUniformLocation(shader, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
@@ -752,25 +814,29 @@ void Demo::BuildSideCube2() {
 
 }
 
-void Demo::DrawColoredSideCube2()
+void Demo::DrawColoredSideCube2(GLuint shader)
 {
-	glUseProgram(activeProgram);
+	//glUseProgram(activeProgram);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture5);
-	GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
-	glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
-	GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
-	glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
-	GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
-	glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
-	GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
-	glUniform1f(shininessMatLoc, 0.6f);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture5);
+	//GLint ambientMatLoc = glGetUniformLocation(this->activeProgram, "material.ambient");
+	//glUniform3f(ambientMatLoc, 0.0215f, 0.1745f, 0.0215f);
+	//GLint diffuseMatLoc = glGetUniformLocation(this->activeProgram, "material.diffuse");
+	//glUniform3f(diffuseMatLoc, 0.07568f, 0.61424f, 0.07568f);
+	//GLint specularMatLoc = glGetUniformLocation(this->activeProgram, "material.specular");
+	//glUniform3f(specularMatLoc, 0.633f, 0.727811f, 0.633f);
+	//GLint shininessMatLoc = glGetUniformLocation(this->activeProgram, "material.shininess");
+	//glUniform1f(shininessMatLoc, 0.6f);
 
-	glBindVertexArray(VAO5); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	UseShader(shader);
 
-	GLint objectColorLoc = glGetUniformLocation(this->activeProgram, "objectColor");
-	glUniform3f(objectColorLoc, .6f, 0.7f, 0.8f);
+	glBindVertexArray(VAO5);
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0, 0, 0));
+
+	GLint modelLoc = glGetUniformLocation(shader, "model");
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
@@ -831,5 +897,5 @@ void Demo::RotateCamera(float speed)
 
 int main(int argc, char** argv) {
 	RenderEngine &app = Demo();
-	app.Start("lightning maps dan multiple lightning", 800, 600, false, false);
+	app.Start("Tugas 4 : blending", 800, 600, false, false);
 }

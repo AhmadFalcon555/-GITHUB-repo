@@ -15,6 +15,9 @@ public:
 private:
 	GLuint shaderProgram, VBO, VAO, EBO, texture, VBO2, VAO2, EBO2, texture2, VBO3, VAO3, EBO3, texture3, VBO4, VAO4, EBO4, texture4, VBO5, VAO5, EBO5, texture5;
 	GLuint activeProgram;
+	GLuint depthmapShader, shadowmapShader, cubeVBO, cubeVAO, cubeEBO, cube_texture, planeVBO, planeVAO, planeEBO, plane_texture, stexture, stexture2, depthMapFBO, depthMap;
+	const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+	
 	float viewCamX, viewCamY, viewCamZ, upCamX, upCamY, upCamZ, posCamX, posCamY, posCamZ, CAMERA_SPEED, fovy;
 	float angle = 0;
 	
@@ -28,15 +31,18 @@ private:
 	void BuildSideCube();
 	void BuildSideCube2();
 	void BuildColoredPlane();
-	void DrawColoredCube();
-	void DrawColoredCube2();
-	void DrawColoredPlane();
-	void DrawColoredSideCube();
-	void DrawColoredSideCube2();
+	void DrawColoredCube(GLuint shader);
+	void DrawColoredCube2(GLuint shader);
+	void DrawColoredPlane(GLuint shader);
+	void DrawColoredSideCube(GLuint shader);
+	void DrawColoredSideCube2(GLuint shader);
 
 	void MoveCamera(float speed);
 	void StrafeCamera(float speed);
 	void RotateCamera(float speed);
 	void InitCamera();
+
+	void BuildDepthMap();
+	void BuildShaders();
 };
 

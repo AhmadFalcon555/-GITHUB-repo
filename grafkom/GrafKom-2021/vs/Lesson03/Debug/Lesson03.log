@@ -1,3 +1,4 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Lesson02.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Lesson02.vcxproj, tugas3.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   Demo.cpp
-  Lesson03.vcxproj -> E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Debug\Lesson03.exe
+E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\Demo.cpp(194,12): error C2374: 'projection': redefinition; multiple initialization
+E:\`GITHUB repo\grafkom\GrafKom-2021\vs\Lesson03\Demo.cpp(190): message : see declaration of 'projection'
